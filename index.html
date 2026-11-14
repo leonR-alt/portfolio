@@ -109,9 +109,49 @@
             color: #F3F3F1;
         }
 
-        /* Background solid, tanpa radial gradient */
+        /* ===== Background: subtle ambient grading ===== */
+
+        /* Hero: dua glow lembut + grid tipis yang memudar */
         .hero-bg {
-            background: #121316;
+            background-color: #121316;
+            background-image:
+                radial-gradient(45rem 30rem at 12% 0%, rgba(21, 128, 61, 0.18), transparent 65%),
+                radial-gradient(38rem 28rem at 92% 18%, rgba(141, 179, 156, 0.10), transparent 68%),
+                radial-gradient(50rem 30rem at 50% 125%, rgba(21, 128, 61, 0.06), transparent 70%);
+        }
+
+        .hero-bg::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(to right, rgba(243, 243, 241, 0.035) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(243, 243, 241, 0.035) 1px, transparent 1px);
+            background-size: 64px 64px;
+            -webkit-mask-image: radial-gradient(65% 60% at 50% 40%, #000 25%, transparent 100%);
+            mask-image: radial-gradient(65% 60% at 50% 40%, #000 25%, transparent 100%);
+        }
+
+        /* Section lain: satu glow tipis per section, posisi selang-seling */
+        #about,
+        #projects {
+            background-image:
+                radial-gradient(45rem 28rem at 90% 0%, rgba(21, 128, 61, 0.08), transparent 70%);
+        }
+
+        #skills,
+        #contact {
+            background-image:
+                radial-gradient(45rem 28rem at 5% 100%, rgba(141, 179, 156, 0.06), transparent 70%);
+        }
+
+        /* Section perlu stacking context agar glow tidak ketutup anak elemen */
+        #about,
+        #skills,
+        #projects,
+        #contact {
+            isolation: isolate;
         }
 
         .card-hover {
